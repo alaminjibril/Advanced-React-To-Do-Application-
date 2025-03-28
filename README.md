@@ -51,9 +51,14 @@ npm start
 
 API Configuration
 
-The weather service is configured in src/utils/weatherService.js. It fetches weather data based on task-related locations.
+The weather service is configured in src/utils/weatherService.js. It fetches weather data based on task-related locations. 
 
 To use it, replace your_api_key_here with your actual API key from OpenWeather.
 
+Login Details 
+
+username: admin
+password: password
+
 Netlify assessment Link
-https://taupe-melba-9a0697.netlify.app/
+https://taupe-melba-9a0697.netlify.app/login
