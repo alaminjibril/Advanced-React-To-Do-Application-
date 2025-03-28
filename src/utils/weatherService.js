@@ -24,3 +24,8 @@ export const getWeather = async (city) => {
       throw new Error(data.message);
     }
   } catch (error) {
+    console.error("Error fetching weather data:", error); // Log the error
+    return null; // Return null or handle the error accordingly
+  }
+};
+
