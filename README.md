@@ -61,4 +61,4 @@ username: admin
 password: password
 
 Netlify assessment Link
-https://taupe-melba-9a0697.netlify.app/login
+https://taupe-melba-9a0697.netlify.app/
