@@ -1,29 +1,38 @@
-// src/redux/reducers/authReducer.js
+// Import action types related to authentication
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../actions/authActions";
 
+// Define the initial state for authentication
 const initialState = {
-  isAuthenticated: JSON.parse(localStorage.getItem("auth")) || false, // Load auth status
-  loading: false,
-  error: null,
+  // Load authentication status from localStorage
+  isAuthenticated: JSON.parse(localStorage.getItem("auth")) || false,
+  // Tracks the login request state
+  loading: false, 
+  error: null, 
 };
 
+// Reducer function to handle authentication-related actions
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
+      // When login is initiated, set loading to true and clear previous errors
       return { ...state, loading: true, error: null };
 
     case LOGIN_SUCCESS:
-      localStorage.setItem("auth", JSON.stringify(true)); // Store auth status
+      // On successful login, store authentication status in localStorage
+      localStorage.setItem("auth", JSON.stringify(true));
       return { ...state, isAuthenticated: true, loading: false };
 
     case LOGIN_FAILURE:
+      // If login fails, store the error message and stop loading
       return { ...state, loading: false, error: action.payload };
 
     case LOGOUT:
-      localStorage.removeItem("auth"); // Remove auth status
+      // On logout, remove authentication status from localStorage
+      localStorage.removeItem("auth");
       return { ...state, isAuthenticated: false };
 
     default:
+      // Return the current state for any unknown actions
       return state;
   }
 };
