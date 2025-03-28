@@ -11,6 +11,7 @@ const TaskInput = () => {
   const [task, setTask] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [location, setLocation] = useState("Fetching...");
+  const [coords, setCoords] = useState(null); // Store latitude & longitude
   const dispatch = useDispatch();
 
   // Fetch user's location using browser's geolocation API
@@ -18,6 +19,7 @@ const TaskInput = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords;
+        setCoords({ latitude, longitude }); // Store coordinates
 
         try {
           // Reverse geocoding to get location name from latitude and longitude
@@ -25,7 +27,7 @@ const TaskInput = () => {
             `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
           );
           const data = await res.json();
-          
+
           // Set the fetched location or fallback to "Unknown"
           if (data.length > 0 && data[0].name) {
             setLocation(data[0].name);
@@ -50,8 +52,8 @@ const TaskInput = () => {
 
     // Check if the task involves outdoor activities
     const outdoorKeywords = ["walk", "run", "hike", "picnic", "football", "cycling"];
-    if (outdoorKeywords.some((keyword) => task.toLowerCase().includes(keyword)) && location !== "Unknown") {
-      weather = await getWeather(location); // Fetch weather data for outdoor tasks
+    if (outdoorKeywords.some((keyword) => task.toLowerCase().includes(keyword)) && coords) {
+      weather = await getWeather(coords.latitude, coords.longitude); // Fetch weather using coordinates
     }
 
     // Create a new task object

@@ -1,6 +1,6 @@
 
 import { configureStore } from "@reduxjs/toolkit";
-import { thunk } from "redux-thunk";
+import  thunk  from "redux-thunk";
 import taskReducer from "./reducers/taskReducer";
 import authReducer from "./reducers/authReducer";
 import weatherReducer from "./reducers/weatherReducer";
