@@ -1,10 +1,10 @@
-// src/components/Navbar.js
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Logout from "./Logout";
+import Logout from "./Logout"; // Import the Logout component
 
 const Navbar = () => {
+  // Get authentication status from Redux store
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
@@ -13,13 +13,15 @@ const Navbar = () => {
         <Link className="navbar-brand" to="/">
           To-Do App
         </Link>
+
+        {/* Conditionally render Login or Logout button based on authentication status */}
         <div className="ml-auto">
           {isAuthenticated ? (
-            <Logout />
+            <Logout /> // Show Logout button if user is authenticated
           ) : (
             <Link to="/login" className="btn btn-primary">
               Login
-            </Link>
+            </Link> 
           )}
         </div>
       </div>
