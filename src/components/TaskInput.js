@@ -22,7 +22,7 @@ const TaskInput = () => {
         try {
           // Reverse geocoding to get location name from latitude and longitude
           const res = await fetch(
-            `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
+            `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
           );
           const data = await res.json();
           
