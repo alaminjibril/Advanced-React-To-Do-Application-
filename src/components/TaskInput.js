@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../redux/actions/taskActions";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid"; // Generates unique task IDs
 import { getWeather } from "../utils/weatherService";
 
-const API_KEY = "da6a68457b06d8e97209d652b013811b"; // OpenWeatherMap API Key
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY; // OpenWeatherMap API Key
 
 const TaskInput = () => {
+  // State for managing task input, priority, and location
   const [task, setTask] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [location, setLocation] = useState("Fetching...");
   const dispatch = useDispatch();
 
+  // Fetch user's location using browser's geolocation API
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords;
 
         try {
+          // Reverse geocoding to get location name from latitude and longitude
           const res = await fetch(
             `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
           );
           const data = await res.json();
+          
+          // Set the fetched location or fallback to "Unknown"
           if (data.length > 0 && data[0].name) {
             setLocation(data[0].name);
           } else {
@@ -37,24 +42,29 @@ const TaskInput = () => {
     }
   }, []);
 
+  // Function to add a task with optional weather data
   const handleAddTask = async () => {
-    if (task.trim() === "") return;
+    if (task.trim() === "") return; // Prevent empty task submissions
 
     let weather = null;
 
+    // Check if the task involves outdoor activities
     const outdoorKeywords = ["walk", "run", "hike", "picnic", "football", "cycling"];
     if (outdoorKeywords.some((keyword) => task.toLowerCase().includes(keyword)) && location !== "Unknown") {
-      weather = await getWeather(location);
+      weather = await getWeather(location); // Fetch weather data for outdoor tasks
     }
 
+    // Create a new task object
     const newTask = {
       id: uuidv4(),
       text: task,
       priority: priority,
-      weather: weather,
+      weather: weather, // Attach weather data if applicable
     };
 
-    dispatch(addTask(newTask));
+    dispatch(addTask(newTask)); // Dispatch action to add task to Redux store
+
+    // Reset input fields after adding task
     setTask("");
     setPriority("Medium");
   };
@@ -71,7 +81,7 @@ const TaskInput = () => {
             placeholder="Enter task..."
             value={task}
             onChange={(e) => setTask(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleAddTask()}
+            onKeyDown={(e) => e.key === "Enter" && handleAddTask()} // Allow Enter key to submit
           />
 
           <select
