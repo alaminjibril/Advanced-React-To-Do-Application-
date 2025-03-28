@@ -1,0 +1,127 @@
+
+body {
+    background-color: #f4f6f8;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .auth-container {
+    max-width: 400px;
+    margin: 100px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .auth-container h2 {
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .auth-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .auth-btn {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .auth-btn:hover {
+    background: #0056b3;
+  }
+  
+  .logout-btn {
+    background: #dc3545;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .logout-btn:hover {
+    background: #c82333;
+  }
+  
+  /* Task Manager */
+  .task-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .task-container h2 {
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .task-input {
+    width: calc(100% - 50px);
+    padding: 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .task-btn {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background: #28a745;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .task-btn:hover {
+    background: #218838;
+  }
+  
+  /* Task List */
+  .task-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .task-list li {
+    display: flex;
+    justify-content: space-between;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .task-priority {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .task-delete {
+    background: #dc3545;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .task-delete:hover {
+    background: #c82333;
+  }
+  
